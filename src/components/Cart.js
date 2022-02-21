@@ -6,25 +6,42 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Text,
+  Grid,
 } from '@chakra-ui/react'
-import React, { useState, useDisclosure, useContext } from 'react'
+import { DeleteIcon } from '@chakra-ui/icons'
+import React, { useContext } from 'react'
 import { ShopContext } from '../context/shopContext'
 
 const Cart = () => {
-  // const { isOpen, onOpen, onClose } = useDisclosure()
-  // const [placement, setPlacement] = useState('right')
-  const { isCartOpen, closeCart, openCart, checkout } = useContext(ShopContext)
+  const { removeLineItem, isCartOpen, closeCart, openCart, checkout } =
+    useContext(ShopContext)
 
   return (
     <>
       <Drawer placement="right" onClose={closeCart} isOpen={isCartOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px">
+            Your Shopping Cart
+          </DrawerHeader>
           <DrawerBody>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            {checkout.lineItems &&
+              checkout.lineItems.map((product) => (
+                <Grid templateColumns="repeat(3, 1fr)" gap={1} key={product.id}>
+                  <Text>{product.title}</Text>
+                  <Text>{product.quantity}</Text>
+                  <DeleteIcon
+                    cursor="pointer"
+                    w={4}
+                    h={4}
+                    justifySelf="flex-end"
+                    alignSelf="center"
+                    onClick={() => removeLineItem()}
+                  />
+                </Grid>
+              ))}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

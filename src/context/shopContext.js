@@ -18,11 +18,11 @@ export class ShopProvider extends Component {
     isMenuOpen: false,
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (localStorage.getItem('checkout_id')) {
-      this.fetchCheckout(localStorage.checkout_id)
+      await this.fetchCheckout(localStorage.checkout_id)
     } else {
-      this.createCheckout()
+      await this.createCheckout()
     }
   }
 
@@ -34,14 +34,32 @@ export class ShopProvider extends Component {
 
   fetchCheckout = async (checkoutId) => {
     const checkout = await client.checkout.fetch(checkoutId)
-    console.log('>', checkout)
-
     this.setState({ checkout })
   }
 
-  createItemToCheckout = async () => {}
+  addItemToCheckout = async (variantId, quantity) => {
+    // Add an item to the checkout
 
-  removeLineItem = async (lineItemsIdsToRemove) => {}
+    const checkoutId = this.state.checkout.id
+
+    const lineItemsToAdd = {
+      variantId,
+      quantity: parseInt(quantity, 10),
+    }
+
+    const checkout = await client.checkout.addLineItems(
+      checkoutId,
+      lineItemsToAdd
+    )
+
+    this.setState({ checkout })
+
+    console.log('---', checkout)
+  }
+
+  removeLineItem = async (lineItemsIdsToRemove) => {
+    console.log('remove from cart')
+  }
 
   fetchAllProducts = async () => {
     const products = await client.product.fetchAll()
