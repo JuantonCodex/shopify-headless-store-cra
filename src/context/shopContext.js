@@ -51,14 +51,15 @@ export class ShopProvider extends Component {
       checkoutId,
       lineItemsToAdd
     )
-
     this.setState({ checkout })
-
-    console.log('---', checkout)
   }
 
   removeLineItem = async (lineItemsIdsToRemove) => {
-    console.log('remove from cart')
+    const checkout = await client.checkout.removeLineItems(
+      this.state.checkout.id,
+      lineItemsIdsToRemove
+    )
+    this.setState({ checkout })
   }
 
   fetchAllProducts = async () => {
