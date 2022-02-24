@@ -8,7 +8,6 @@ const Home = () => {
   useEffect(() => {
     fetchAllProducts()
   }, [fetchAllProducts])
-  console.log('products >', products)
   if (!products) return <div>Loading ...</div>
 
   return (

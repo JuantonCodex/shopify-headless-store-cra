@@ -20,8 +20,6 @@ const Cart = () => {
   const { removeLineItem, isCartOpen, closeCart, openCart, checkout } =
     useContext(ShopContext)
 
-  console.log('checkout >', checkout)
-
   return (
     <>
       <Drawer placement="right" onClose={closeCart} isOpen={isCartOpen}>
@@ -32,7 +30,7 @@ const Cart = () => {
             Your Shopping Cart
           </DrawerHeader>
           <DrawerBody pt="1rem">
-            {checkout.lineItems &&
+            {checkout.lineItems?.length ? (
               checkout.lineItems.map((product) => (
                 <Grid
                   templateColumns="1fr 1fr 0.3fr 0.3fr"
@@ -52,15 +50,20 @@ const Cart = () => {
                     onClick={() => removeLineItem(product.id)}
                   />
                 </Grid>
-              ))}
+              ))
+            ) : (
+              <div>Empty cart</div>
+            )}
           </DrawerBody>
-          <DrawerFooter>
-            <Button w="100%">
-              <Link w="100%" href={checkout.webUrl}>
-                Checkout
-              </Link>
-            </Button>
-          </DrawerFooter>
+          {checkout.lineItems?.length ? (
+            <DrawerFooter>
+              <Button w="100%">
+                <Link w="100%" href={checkout.webUrl}>
+                  Checkout
+                </Link>
+              </Button>
+            </DrawerFooter>
+          ) : null}
         </DrawerContent>
       </Drawer>
     </>
