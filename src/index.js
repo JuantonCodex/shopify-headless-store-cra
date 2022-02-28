@@ -5,10 +5,13 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import ShopProvider from './context/shopContext'
 import { ChakraProvider } from '@chakra-ui/react'
+import { customTheme } from './themes'
+
+import '@fontsource/poppins'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <ShopProvider>
         <App />
       </ShopProvider>

@@ -1,8 +1,12 @@
-import { createBreakpoints } from '@chakra-ui/theme-tools'
-const breakpoints = createBreakpoints({
-  sm: '30em',
-  md: '48em',
-  lg: '62em',
-  xl: '80em',
-  '2xl': '96em',
+import { extendTheme } from '@chakra-ui/react'
+
+export const customTheme = extendTheme({
+  colors: {
+    primary: '#003364',
+    secondary: '#FF5F00',
+  },
+  fonts: {
+    heading: 'Poppins, sans-serif',
+    body: 'Poppins, sans-serif',
+  },
 })
