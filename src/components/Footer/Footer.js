@@ -8,7 +8,6 @@ const Footer = () => {
       <Grid
         templateColumns="repeat(2, 1fr)"
         w="100%"
-        selfJustify="center"
         maxW="1000px"
         margin="0 auto"
         paddingX="1rem"

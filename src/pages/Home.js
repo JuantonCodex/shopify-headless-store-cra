@@ -30,7 +30,7 @@ const Home = () => {
             <Box _hover={{ opacity: '80%' }} textAlign="center">
               <Image src={product.images[0].src} />
               <Text>{product.title}</Text>
-              <Text>{product.variants[0].price}</Text>
+              {/* <Text>{product.variants[0].price}</Text> */}
             </Box>
           </Link>
         ))}

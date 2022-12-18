@@ -7,7 +7,7 @@ const MainSlider = () => {
       mb="1rem"
       w="100%"
       minW="320px"
-      h="490px"
+      h="200px"
       bg="teal.50"
       justifyContent="center"
       alignItems="center"
